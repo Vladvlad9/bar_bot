@@ -1,6 +1,10 @@
+import os
+from dotenv import load_dotenv
+from os import environ
 
-BOT_TOKEN = "2081137248:AAFdhOtC8FnFFS56f-3txZMimbX1Q_RqBnk"
-admins = [
-	608287610,
-]
+load_dotenv(".env")
+BOT_TOKEN = os.environ["BOT_TOKEN"]
 
+
+async def load_admins() -> tuple:
+    return tuple(map(int, environ["ADMINS"].split(",")))
