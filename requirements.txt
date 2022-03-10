@@ -1,0 +1,8 @@
+python-dotenv~=0.19.2
+pip~=22.0.3
+configparser~=5.2.0
+lxml~=4.7.1
+setuptools~=58.1.0
+data~=0.4
+aiogram~=2.18
+loader~=2017.9.11
