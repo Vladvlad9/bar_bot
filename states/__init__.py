@@ -1,1 +1,1 @@
-from .main_menu_states import *
+from .photo_states import *
