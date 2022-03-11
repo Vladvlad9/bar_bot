@@ -10,11 +10,10 @@ from states import main_menu_state
 async def load_name(message: types.Message, state: FSMContext):
     await message.answer("Произведите действия", reply_markup= await main_menu_admin())
     await state.update_data(name_handlers=message.text)
-    print('a')
+
 
 @dp.message_handler(text="Добавить", state=None)
 async def cm_start(message: types.Message):
-
     await main_menu_state.photo.set()
     await message.reply('Загрузить фото')
 
@@ -36,7 +35,8 @@ async def load_photo(message: types.Message, state: FSMContext):
 
     for name_handler, name_bd in data.items():
         if name_BD in name_handler:
-            await db.add_new_photo_main_menu(photo, name_bd)
+            if await db.add_new_photo_main_menu(photo, name_bd):
+                await message.answer('Вы успешно загрузили изображение')
             break
 
     await state.finish()
