@@ -205,9 +205,9 @@ class DBApi(object):
         ''', (product_id, ))
         return tuple(self.__cur.fetchone())
 
-    async def add_new_photo_main_menu(self, photo: dict) -> bool:
+    async def add_new_photo_main_menu(self, photo: str, name_db) -> bool:
         try:
-            add_photo = f'INSERT INTO main_menu(photo) VALUES("{photo["photo"]}")'
+            add_photo = f'INSERT INTO {name_db}(photo) VALUES("{photo}")'
             self.__cur.execute(add_photo)
             self.__conn.commit()
         except IntegrityError:
