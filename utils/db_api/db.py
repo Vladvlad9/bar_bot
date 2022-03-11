@@ -215,9 +215,9 @@ class DBApi(object):
         else:
             return True
 
-    async def get_photo_main_menu(self):
+    async def get_photo_main_menu(self, name_db: str):
         self.__cur.execute('SELECT photo '
-                           'FROM main_menu')
+                           f'FROM {name_db}')
         return self.__cur.fetchall()
 
 
