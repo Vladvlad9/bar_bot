@@ -8,9 +8,9 @@ async def main_menu_admin():
         one_time_keyboard=False,
         keyboard=[
             [
-                KeyboardButton(text='Основное меню Добавить'),
-                KeyboardButton(text='Основное меню Изменить'),
-                KeyboardButton(text='Основное меню Удалить'),
+                KeyboardButton(text='Добавить'),
+                KeyboardButton(text='Изменить'),
+                KeyboardButton(text='Удалить'),
             ],
             [
                 KeyboardButton(text='Назад'),
