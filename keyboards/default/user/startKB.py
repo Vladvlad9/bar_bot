@@ -1,6 +1,19 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 
+async def back_kb() -> ReplyKeyboardMarkup:
+    keyboard = ReplyKeyboardMarkup(
+        resize_keyboard=True,
+        one_time_keyboard=False,
+        keyboard=[
+            [
+                KeyboardButton(text="Назад")
+            ]
+        ]
+    )
+    return keyboard
+
+
 async def start_kb() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         row_width=3,
