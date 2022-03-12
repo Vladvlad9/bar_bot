@@ -1,10 +1,22 @@
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
 
 from states import reviewST
 
 from loader import dp
+
+
+@dp.message_handler(state='*', commands="Назад")
+@dp.message_handler(Text(equals='Назад', ignore_case=True), state='*')
+async def cancel_handler(message: types.Message, state: FSMContext):
+    current_state = await state.get_data()
+
+    if current_state is None:
+        return
+    await state.finish()
+    await message.reply('OK')
 
 
 @dp.message_handler(text="Оставить отзыв")
