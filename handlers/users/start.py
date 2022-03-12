@@ -16,6 +16,7 @@ async def create_database(message: types.Message):
     await message.answer(text="База данных успешно создана!")
     await db.create_all_database()
 
+
 @dp.message_handler(commands=["moderator", "admin", ])
 async def create_database(message: types.Message):
     await message.answer(text="Вы вошли как админ", reply_markup=await adminKB.start_kb_admin())
