@@ -8,3 +8,4 @@ from keyboards.default.user.our_establishments import *
 from keyboards.default.user.reserve_table import *
 from keyboards.default.user.review import *
 from keyboards.default.user.startKB import *
+from keyboards.default.user.contacts import *
