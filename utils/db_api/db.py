@@ -241,6 +241,26 @@ class DBApi(object):
         else:
             return True
 
+    async def add_booking_user(self, user_id, lname, fname, date, time, number_people):
+        try:
+            self.__cur.execute('''
+                        INSERT INTO
+                        booking(
+                            user_id,
+                            lastName,
+                            firstName,
+                            date,
+                            time,
+                            number_people
+                        )
+                        VALUES(?, ?, ?, ?, ?, ?)
+                    ''', (user_id, lname, fname, date, time, number_people))
+            self.__conn.commit()
+        except IntegrityError:
+            return False
+        else:
+            return True
+
 
     async def create_all_database(self) -> None:
         """CREATE DATABASE"""
