@@ -220,6 +220,27 @@ class DBApi(object):
                            f'FROM {name_db}')
         return self.__cur.fetchall()
 
+    async def get_stock(self):
+        self.__cur.execute('SELECT * '
+                           f'FROM stock')
+        return self.__cur.fetchall()
+
+    async def add_stock(self, photo: str, description: str) -> bool:
+        try:
+            self.__cur.execute('''
+                        INSERT INTO
+                        stock(
+                            photo,
+                            description
+                        )
+                        VALUES(?, ?)
+                    ''', (photo, description))
+            self.__conn.commit()
+        except IntegrityError:
+            return False
+        else:
+            return True
+
 
     async def create_all_database(self) -> None:
         """CREATE DATABASE"""
