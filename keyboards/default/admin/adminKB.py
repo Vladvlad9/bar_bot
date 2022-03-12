@@ -15,6 +15,9 @@ async def start_kb_admin():
             [
                 KeyboardButton(text='Пивная карта_admin'),
                 KeyboardButton(text='Пиво в банке_admin')
+            ],
+            [
+                KeyboardButton(text='Акции_admin')
             ]
         ]
     )
