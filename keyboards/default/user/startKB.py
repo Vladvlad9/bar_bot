@@ -14,6 +14,19 @@ async def back_kb() -> ReplyKeyboardMarkup:
     return keyboard
 
 
+async def back_kb_mn() -> ReplyKeyboardMarkup:
+    keyboard = ReplyKeyboardMarkup(
+        resize_keyboard=True,
+        one_time_keyboard=False,
+        keyboard=[
+            [
+                KeyboardButton(text="Назад")
+            ]
+        ]
+    )
+    return keyboard
+
+
 async def start_kb() -> ReplyKeyboardMarkup:
     keyboard = ReplyKeyboardMarkup(
         row_width=3,
@@ -21,17 +34,16 @@ async def start_kb() -> ReplyKeyboardMarkup:
         one_time_keyboard=False,
         keyboard=[
             [
-                KeyboardButton(text="Основное меню"),
-                KeyboardButton(text="Барное меню"),
-                KeyboardButton(text="Пивная карта")
+                KeyboardButton(text="Меню")
             ],
             [
-                KeyboardButton(text="Пиво в банке"),
+
                 KeyboardButton(text="Футбольные трансляции"),
-                KeyboardButton(text="Акции")
+                KeyboardButton(text="Акции"),
+                KeyboardButton(text="Забронировать столик"),
             ],
             [
-                KeyboardButton(text="Забронировать столик"),
+                KeyboardButton(text="Контакты"),
                 KeyboardButton(text="Оставить отзыв"),
                 KeyboardButton(text="Программа лояльности")
             ],
