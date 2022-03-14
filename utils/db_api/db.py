@@ -216,9 +216,29 @@ class DBApi(object):
             return True
 
     async def get_photo_main_menu(self, name_db: str):
-        self.__cur.execute('SELECT photo '
+        self.__cur.execute('SELECT * '
                            f'FROM {name_db}')
         return self.__cur.fetchall()
+
+    async def delete_photo_main_menu(self, name_db: str, id_photo: int) -> bool:
+        try:
+            result = f"DELETE FROM {name_db} WHERE id = {id_photo}"
+            self.__cur.execute(result)
+            self.__conn.commit()
+        except IntegrityError:
+            return False
+        else:
+            return True
+
+
+
+    # async def update_all_main_menu(self, id_photo):
+    #     self.__cur.execute('''
+    #                 UPDATE bar_menu
+    #                 SET photo = ?
+    #                 WHERE id = ?
+    #             ''', (id_photo, user_id))
+    #     self.__conn.commit()
 
     async def get_stock(self):
         self.__cur.execute('SELECT * '
