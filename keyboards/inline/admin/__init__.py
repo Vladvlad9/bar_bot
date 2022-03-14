@@ -1,1 +1,1 @@
-from .stock_inline import *
+from .edit import *
