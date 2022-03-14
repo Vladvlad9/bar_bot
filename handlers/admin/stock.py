@@ -1,11 +1,22 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
 
 from keyboards import stock_Df_admin
-from keyboards.inline.admin import stock_inline_keyboard
 from states import stockST
 
 from loader import dp, db
+
+
+@dp.message_handler(state='*', commands="Назад")
+@dp.message_handler(Text(equals='Назад', ignore_case=True), state='*')
+async def cancel_handler(message: types.Message, state: FSMContext):
+    current_state = await state.get_data()
+
+    if current_state is None:
+        return
+    await state.finish()
+    await message.reply('OK')
 
 
 @dp.message_handler(text="Акции_admin")
