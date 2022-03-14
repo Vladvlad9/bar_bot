@@ -9,8 +9,7 @@ async def main_menu_admin():
         keyboard=[
             [
                 KeyboardButton(text='Добавить'),
-                KeyboardButton(text='Изменить'),
-                KeyboardButton(text='Удалить'),
+                KeyboardButton(text='Редактировать')
             ],
             [
                 KeyboardButton(text='Назад'),
