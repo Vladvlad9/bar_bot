@@ -77,21 +77,82 @@ class DBApi(object):
         ''', (user_id,))
         return bool(self.__cur.fetchone())
 
-    async def add_new_user(self, user_id: int, role: str = "user") -> bool:
+    async def add_new_user(self, user_id: int, first_name: str, last_name: str) -> bool:
         """ADD NEW USER"""
         try:
             self.__cur.execute('''
                 INSERT INTO users(
                     user_id,
-                    role
+                    first_name,
+                    last_name
                 )
-                VALUES(?, ?)
-            ''', (user_id, role))
+                VALUES(?, ?, ?)
+            ''', (user_id, first_name, last_name))
             self.__conn.commit()
         except IntegrityError:
             return False
         else:
             return True
+
+    async def add_new_user_referral(self, user_id: int, first_name: str, last_name: str, referral) -> bool:
+        """ADD NEW USER"""
+        try:
+            self.__cur.execute('''
+                INSERT INTO users(
+                    user_id,
+                    first_name,
+                    last_name,
+                    referral
+                )
+                VALUES(?, ?, ?, ?)
+            ''', (user_id, first_name, last_name, referral))
+            self.__conn.commit()
+        except IntegrityError:
+            return False
+        else:
+            return True
+
+
+    async def add_money_user(self, balance: int, user_id: str) -> None:
+        """EDIT USER ROLE"""
+        self.__cur.execute('''
+            UPDATE users
+            SET balance = ?
+            WHERE user_id = ?
+        ''', (balance, user_id))
+        self.__conn.commit()
+
+    async def check_referrals(self, user_id:int):
+        result = f"SELECT user_id FROM users WHERE referral = (SELECT user_id FROM users WHERE user_id = {user_id})"
+        return self.__cur.execute(result).fetchall()
+
+    async def check_balance(self, user_id: int):
+        result = f"SELECT balance FROM users WHERE user_id = {user_id}"
+        return self.__cur.execute(result).fetchall()
+
+    async def count_users(self):
+        result = 'SELECT COUNT(*) FROM users'
+        return self.__cur.execute(result).fetchall()
+
+    async def get_id_users(self, user_id:int):
+        result = f'SELECT id FROM users WHERE user_id = {user_id}'
+        return self.__cur.execute(result).fetchall()
+
+    async def select_user(self, id_user: int):
+        self.__cur.execute('''
+                    SELECT user_id
+                    FROM users
+                    WHERE user_id = ?
+                ''', (id_user,))
+        return self.__cur.fetchall()
+
+    async def select_user_qrcode(self, id_user: int):
+        self.__cur.execute('''
+                    SELECT qrcode
+                    FROM users
+                    WHERE user_id = ?
+                ''', (id_user,))
+        return self.__cur.fetchall()
 
     async def change_user_role(self, user_id: int, new_role: str) -> None:
         """EDIT USER ROLE"""
@@ -280,6 +341,8 @@ class DBApi(object):
             return False
         else:
             return True
+
+
 
 
     async def create_all_database(self) -> None:
