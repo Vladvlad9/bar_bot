@@ -8,3 +8,8 @@ from loader import dp, db
 @dp.message_handler(text="Меню")
 async def back_main_menu(message: types.Message):
     await message.answer('Основное меню', reply_markup= await menu_kb())
+
+
+@dp.message_handler(text="Назад")
+async def back_main_menu(message: types.Message):
+    await message.answer('Основное меню', reply_markup= await start_kb())
