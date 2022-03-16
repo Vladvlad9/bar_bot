@@ -15,8 +15,8 @@ data ={
     }
 
 
-@dp.message_handler(state='*', commands="Назад")
-@dp.message_handler(Text(equals='Назад', ignore_case=True), state='*')
+@dp.message_handler(state='*', commands="Назад_")
+@dp.message_handler(Text(equals='Назад_', ignore_case=True), state='*')
 async def cancel_handler(message: types.Message, state: FSMContext):
     current_state = await state.get_data()
 
