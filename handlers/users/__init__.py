@@ -1,4 +1,5 @@
 from .main_menu_handlers_user import dp
+from .loyalty_program import dp
 from .reviews import dp
 from .stock import dp
 from .menu import dp
