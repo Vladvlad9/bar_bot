@@ -1,6 +1,7 @@
 from aiogram import types
 
 from keyboards import *
+from keyboards.default.user.menu import menu_kb
 from loader import dp, db
 
 
@@ -21,11 +22,14 @@ async def load_name(message: types.Message):
     for i, j in data.items():
         if message.text in i:
             photo = await db.get_photo_main_menu(j)
-            for photo in photo:
-                await message.answer_photo(photo[0], reply_markup=markup)
-                break
+            if not photo:
+                await message.answer('Изображение временно отсутствует')
+            else:
+                for photo in photo:
+                    await message.answer_photo(photo[1], reply_markup=markup)
+                    break
 
 
 @dp.message_handler(text="Назад")
 async def back_main_menu(message: types.Message):
-    await message.answer('Главное меню', reply_markup= await start_kb())
+    await message.answer('Главное меню', reply_markup= await menu_kb())
