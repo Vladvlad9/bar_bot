@@ -12,7 +12,7 @@ async def main_menu_admin():
                 KeyboardButton(text='Редактировать')
             ],
             [
-                KeyboardButton(text='Назад'),
+                KeyboardButton(text='Назад_'),
             ]
         ]
     )
